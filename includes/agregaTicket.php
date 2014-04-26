@@ -1,6 +1,7 @@
 <?php 
-var_dump($_POST);
-exit;
+/*var_dump($_POST);
+exit;*/
+/*
 $conexion=mysql_connect("127.0.0.1","root","123");
 	if (!$conexion) {
     	echo "hubo un problema en la conexion";
@@ -25,5 +26,9 @@ if ($reg=mysql_fetch_array($registro))
 	{
 	echo json_encode($msg, true);	
 	}
+*/
 
+	//DEBUG TICKET ENCONTRADO
+	$msg = array('found' => true);
+	echo json_encode($msg, true);
 ?>

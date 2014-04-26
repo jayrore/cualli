@@ -59,13 +59,10 @@
   <input type="hidden" name="id_cliente" value="">
 </div>
 <div class="col-lg-6">
-    <ul>
-        <li>sdkjas</li>
-        <li>sdkjas</li>
-        <li>sdkjas</li>
-        <li>sdkjas</li>
-        <li>sdkjas</li>
-    </ul>
+    <h2 class="text-center">Por facturar <small>0</small></h2>
+    <ol id="lista-tickets">
+      
+    </ol>
 </div>
 </form>
 
@@ -81,8 +78,18 @@
      
      $.post('./includes/agregaTicket.php', obj , function(data, textStatus, xhr) {
          /*optional stuff to do after success */
-         console.log(data);
-         $('#ctn_tickets').append(data);
+         var datos = JSON.parse(data);         
+         if(datos.found === true){
+            var li = $("<li>"+obj.ticket+"</li>"),
+                ul = $('#lista-tickets');
+            ul.append(li);
+            
+            ul.closest('div').find('small').text(cantidad);
+         }else{
+            alert("ticket no disponible para facturacion");
+         }
      });
   });
+
+  
 </script>
