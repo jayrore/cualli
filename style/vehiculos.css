@@ -1,0 +1,237 @@
+
+/***********************************************************************************************/
+/***********************************************************************************************/
+/***********************************************************************************************/
+
+#header_table {
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+#header_logo {
+	height: 130px;
+	width: 195px;
+	padding: 0px;
+}
+
+#header_top {
+	height: 65px;
+	width: 455px;
+	padding: 0px;
+}
+
+#header_mexico {
+	height: 65px;
+	width: 130px;
+	padding: 0px;
+}
+
+#header_firma {
+	height: 32px;
+	width: 455px;
+	padding: 0px;
+}
+
+#header_buscar {
+	background-color: #ffffff;
+}
+
+#header_menu {
+	background-color: #5a5a5a;
+	height: 30px;
+}
+
+#header_fecha {
+	background-color: #8fc450;
+	height: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFF;
+	text-align: right;
+	padding-right: 10px;
+}
+
+/***********************************************************************************************/
+/***********************************************************************************************/
+/***********************************************************************************************/
+
+#data_table {
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+/***********************************************************************************************/
+/***********************************************************************************************/
+/***********************************************************************************************/
+
+#info_cliente {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	border:0px solid #000000;
+	margin: 0 auto;
+	padding: 3px;
+	border-collapse:collapse;
+	padding-top: 20px;
+}
+
+#info_cliente_h{
+	border:1px solid #000000;
+	padding: 1px;
+	margin: 1px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	border:1px solid #000000;
+	background-color: #CCC;
+	text-align: left;
+}
+
+#info_cliente_n{
+	border:1px solid #000000;
+	padding: 1px;
+	margin: 1px;
+	text-align: right;
+	width: 100px;
+}
+
+#info_cliente_tl{
+	border:1px solid #000000;
+	padding: 1px;
+	margin: 1px;
+	text-align: left;
+	width: 320px;
+}
+
+/***********************************************************************************************/
+/***********************************************************************************************/
+/***********************************************************************************************/
+
+#info_detalle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	border:0px solid #000000;
+	margin: 0 auto;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-collapse:collapse;
+	padding-top: 20px;
+}
+
+#info_detalle_h{
+	border:0px solid #000000;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin: 1px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	border:1px solid #000000;
+	background-color: #CCC;
+	text-align: left;
+}
+
+#info_detalle_n{
+	border:0px solid #000000;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin: 1px;
+	text-align: right;
+	width: 70px;
+}
+
+#info_detalle_t{
+	border:0px solid #000000;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin: 1px;
+	text-align: left;
+	width: 150px;
+}
+
+#info_detalle_ts{
+	border:0px solid #000000;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin: 1px;
+	text-align: left;
+	width: 50px;
+}
+
+
+#info_detalle_n_s{
+	border:0px solid #000000;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin: 1px;
+	text-align: right;
+	width: 70px;
+	background-color: #EEE;
+}
+
+#info_detalle_t_s{
+	border:0px solid #000000;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin: 1px;
+	text-align: left;
+	width: 150px;
+	background-color: #EEE;
+}
+
+#info_detalle_ts_s{
+	border:0px solid #000000;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin: 1px;
+	text-align: left;
+	width: 50px;
+	background-color: #EEE;
+}
+
+
+/***********************************************************************************************/
+/***********************************************************************************************/
+/***********************************************************************************************/
+
+
+div#menu {
+  background: #5a5a5a;
+  float: left;
+  width: 100%;
+  font-family:Arial;
+  font-size:12px;
+}
+
+div#menu li {
+   float:left;       
+   position:relative;       
+   list-style-type:none;
+}
+
+div#menu a {
+  display:block;        
+  text-decoration:none;        
+  color:#069;     
+  padding: 2px 18px;
+  background: #5a5a5a;
+  color: #fff;
+}
+
+div#menu a:hover {
+  color: #000;
+  background: #eee;
+}
