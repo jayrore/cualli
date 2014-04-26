@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-	<div class="page-header">
+<div class="page-header">
 	  <div class="row">
 	  	<div class="col-md-3 col-lg-3">
 	  	<img src="./img/cualli.jpg" class="img-responsive" alt="Responsive image">
@@ -21,11 +21,14 @@
 	  	</div>
 	  </div>
 	</div>
+</div>
+<div id="ctn_principal"class="container">
+	
 	<div class="jumbotron">
 		<h1 class="text-center">Facturacion Electronica</h1>
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
-				<form method="GET" action="valida_rfc.php">
+				<form id="form1">
 			<input type="text" name="rfc" id="rcf_txt" class="form-control input-lg" value="" required="required" pattern="^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})$"  placeholder="Ingrese su RFC o ID de cliente">
 			<br>
 			<button type="submit" class="btn btn-primary btn-lg text-center">Buscar</button>
@@ -38,6 +41,9 @@
 			<p></p>
 		</div>	
 	</div>
+</div>
+<div class="container" id="ctn_tickets">
+	
 </div>
 <script type="text/javascript">
 var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
@@ -62,6 +68,33 @@ var intputElements = document.getElementsByTagName("input");
         };
     }
 
+  //Form1 
+  $('#form1').on("submit",function(event){
+  			event.preventDefault();
+    $.ajax({
+  	url: './includes/valida_rfc.php',
+  	type: 'POST',
+  	data: {rfc: $(this).find('input').val()},
+  })
+  .done(function(data) {
+  	var datos;
+    try{
+		datos = JSON.parse(data);
+        if(datos.found === false){
+  		 $('#ctn_tickets').html(JSON.stringify(data) + "viene vacio");
+  	    }else if(datos.found === true){
+  		  $('#ctn_principal').slideToggle();
+  		  $.get('./includes/tickets.html', function(form) {
+  		      $('#ctn_tickets').html(form);	
+  		  });  		
+  	    }
+    }catch(e){
+		$('#ctn_tickets').html("hubo un problema con la base de datos");
+    } 	
+  	 	
+  });
+
+  });
 
 </script>
 </body>
