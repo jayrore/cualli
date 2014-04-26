@@ -171,7 +171,7 @@
 								}
 								///fin de verificacion
 								
-								if (ticket != '') //verificamos que no se encuentre en la lista
+								if ($ticket != '') //verificamos que no se encuentre en la lista
 								{
 									$lista_ventas = $lista_tickets;
 									while ($error==0)
@@ -266,6 +266,7 @@
 										}
 									}
 									else
+										// ADD
 									{						
 										if ($ticket=="")
 										{
@@ -290,30 +291,27 @@
 											//	echo ("<br>");
 											//}
 											//else
-											{
+											//{
 												//$ticket = obten_ticket($ticket);
-											
+											    $msg = array('found' => false);
 												$registro=mysql_query("select id_venta from ventas where id_venta='$ticket' and factura=0 and monto=$_REQUEST[monto] and YEAR(fecha_venta)= YEAR(now()) and MONTH(fecha_venta)= MONTH(now()) ",$conexion) or
 												die("Error:".mysql_error());
-										  		echo "select id_venta from ventas where id_venta='$ticket' and factura=0 and monto=$_REQUEST[monto] and YEAR(fecha_venta)= YEAR(now()) and MONTH(fecha_venta)= MONTH(now()) ";
+										  		//echo "select id_venta from ventas where id_venta='$ticket' and factura=0 and monto=$_REQUEST[monto] and YEAR(fecha_venta)= YEAR(now()) and MONTH(fecha_venta)= MONTH(now()) ";
 												if ($reg=mysql_fetch_array($registro))
 												{
-													$id_venta=$reg['id_venta'];
-													echo ("id_venta=$id_venta");
-													echo ("<br>");
-													echo ("ticket=$ticket");
-													echo ("<br>");
-													
-													$lista_tickets = $lista_tickets.$ticket.",";
-													header("location:ticket.php?lista_tickets=$lista_tickets&id_cliente=$_REQUEST[id_cliente]&correo=$correo_electronico");
-													
+												
+													//$lista_tickets = $lista_tickets.$ticket.",";
+													//header("location:ticket.php?lista_tickets=$lista_tickets&id_cliente=$_REQUEST[id_cliente]&correo=$correo_electronico");
+													$msg['found'] = true;
+													echo json_encode($msg, true);
+
 												}	
 												else
 												{
-													echo "No es valido o ha expirado el ticket introducido 2:$ticket";
-													
+													//echo "No es valido o ha expirado el ticket introducido 2:$ticket";
+													echo json_encode($msg, true);	
 												}
-											}
+											//}
 										}
 									}
 								}

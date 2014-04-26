@@ -85,7 +85,8 @@ var intputElements = document.getElementsByTagName("input");
   	    }else if(datos.found === true){
   		  $('#ctn_principal').slideToggle();
   		  $.get('./includes/tickets.html', function(form) {
-  		      $('#ctn_tickets').html(form);	
+  		  	 var formulario2 = $(form);
+  		      formulario2.appendTo('#ctn_tickets');	
   		  });  		
   	    }
     }catch(e){
@@ -95,6 +96,7 @@ var intputElements = document.getElementsByTagName("input");
   });
 
   });
+
 
 </script>
 </body>

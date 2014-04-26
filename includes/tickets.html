@@ -25,7 +25,7 @@
   </textarea>               
   <input type='button' name='BReset' onClick='lista_tickets.value=""' value='Vaciar' id='BReset'>
 </form> -->
-<form role="form">
+<form role="form" id="form2">
 <div class="col-lg-6">
   <div class="form-group">
     <input type="text" name="ticket" class="form-control" placeholder="Numero de ticket">
@@ -50,14 +50,11 @@
     <input type="text" name="correo" class="form-control" placeholder="Correo Electronico">
   </div>
   <div class="form-group">
-    <input class="btn btn-primary" name="boton" type="submit" id="Enviar" value="Enviar" >
+    <input class="btn btn-primary" name="enviar" type="submit" id="enviar" value="Enviar" >
  
-    <input class="btn" name="boton" type="submit" id="Añadir" value="Añadir">
+    <input class="btn" name="add" type="button" id="btn-add" value="Añadir">
  
     <input class="btn"type='button' name='BReset' onClick='lista_tickets.value=""' value='Vaciar' id='BReset'>
-  </div>
-  <div class="form-group">
-   <textarea readonly name="lista_tickets" id="lista_tickets" rows="5" class="form-control" rows="3"></textarea>   
   </div>
   <input type="hidden" name="id_cliente" value="">
 </div>
@@ -74,4 +71,18 @@
 
 
 </div>
-
+<script type="text/javascript">
+      //form2
+ $("#btn-add").on("click",function(event){
+            event.preventDefault();
+     var obj={ticket:"", monto:""}; 
+     obj.ticket = $('input[name="ticket"]').val();
+     obj.monto = $('input[name="monto"]').val();
+     
+     $.post('./includes/agregaTicket.php', obj , function(data, textStatus, xhr) {
+         /*optional stuff to do after success */
+         console.log(data);
+         $('#ctn_tickets').append(data);
+     });
+  });
+</script>
