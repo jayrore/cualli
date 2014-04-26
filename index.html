@@ -3,8 +3,9 @@
 <head>
 	<title>Facturacion en linea</title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
 	<link rel="stylesheet" type="text/css" href="./js/bst/css/bootstrap.min.css">
-	<script src="./js/bst/js/bootstrap.min.js"></script>
+
 	<script type="text/javascript" src="./js/jqui/js/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="./js/jqui/js/jquery-ui-1.10.4.custom.min.js"></script>
 </head>
@@ -48,8 +49,19 @@ $('#rcf_txt').on("keyup",function(){
 	var mayus = $(this).val().toUpperCase();
 	$(this).val(mayus);
 });
- var rcf_txt = document.getElementById('rcf_txt');
-  rcf_txt.setCustomValidity('Ingrese su RFC de 12 o 13 caracteres segun corresponda.');
+
+var intputElements = document.getElementsByTagName("input");
+    for (var i = 0; i < intputElements.length; i++) {
+        intputElements[i].oninvalid = function (e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                if (e.target.name == "rfc") {
+                    e.target.setCustomValidity("Ingrese su RFC valido de 12 a 13 caracteres segun corresponda.");
+                }
+            }
+        };
+    }
+
 
 </script>
 </body>
