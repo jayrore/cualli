@@ -98,7 +98,8 @@ console.log(facturar);
   });
  $("#btn-reset").on("click",function(){
     $("#lista-tickets").empty();
-     $('#form2').find('input[type=text]').slice(0,2).val("");
+    $('#form2').find('input[type=text]').slice(0,2).val("");
+    facturar.listaTickets=[];
  });
 
 $('#form3').on('submit', function(event) {
