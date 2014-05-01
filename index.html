@@ -46,6 +46,7 @@
 	
 </div>
 <script type="text/javascript">
+var idCliente="";
 var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
 var f=new Date();
@@ -71,10 +72,11 @@ var intputElements = document.getElementsByTagName("input");
   //Form1 
   $('#form1').on("submit",function(event){
   			event.preventDefault();
+  			idCliente = $(this).find('input').val();
     $.ajax({
   	url: './includes/valida_rfc.php',
   	type: 'POST',
-  	data: {rfc: $(this).find('input').val()},
+  	data: {rfc: idCliente},
   })
   .done(function(data) {
   	var datos;

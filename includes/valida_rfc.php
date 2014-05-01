@@ -25,6 +25,8 @@
 		$msg['id_cliente'] = $row['id_cliente'];
 		$msg['found'] = true;
 		}*/	
+
+		
 		$msg['id_cliente'] = "dfkjhfjshfk";
 		$msg['found'] = true;
 $jsonMsg = json_encode($msg, true);

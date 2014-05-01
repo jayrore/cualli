@@ -1,41 +1,17 @@
 <div class="row">
 <div class="col-lg-12"><h1>Ingrese los  tickets que quiera facturar</h1></div>
-<!-- <form action="valida_ticket.php" method="post">
-  Ingrese el número de ticket:<br>
-  <input name="ticket" type="text" class="input_login" /><br><br>
-  Ingrese el monto del ticket:<br>
-  <input name="monto" type="text" class="input_login" /><br><br>
-  Método de Pago:<br>
-  <select name="forma_pago">
-    <option value="Efectivo">Efectivo</option>
-    <option value="Transferencia electronica">Transferencia electronica</option>
-    <option value="Tarjeta de credito">Tarjeta de credito</option>
-    <option value="Tarjeta de debito">Tarjeta de debito</option>
-    <option value="Tarjeta de servicio">Tarjeta de servicio</option>
-    <option value="Monedero electronico">Monedero electronico</option>
-    <option value="Cheques">Cheques</option>
-    <option value="No identificado">No identificado</option>
-  </select> <br><br>
-  Correo Electrónico:<br>
-  <input name="correo" type="text" class="input_login" value="" size="40"/><br><br>
-  <input name="boton" type="submit" id="Enviar" value="Enviar" />
-  <input name="boton" type="submit" id="Añadir" value="Añadir" /><br><br> 
-  <input type="hidden" name="id_cliente" value="" >
-  <textarea readonly name="lista_tickets" id="lista_tickets" rows="5" cols="20" >
-  </textarea>               
-  <input type='button' name='BReset' onClick='lista_tickets.value=""' value='Vaciar' id='BReset'>
-</form> -->
-<form role="form" id="form2">
+
 <div class="col-lg-6">
+<form role="form" id="form2" method="post">
   <div class="form-group">
-    <input type="text" name="ticket" class="form-control" placeholder="Numero de ticket">
+    <input type="text" name="ticket" class="form-control" placeholder="Numero de ticket" required>
   </div>
   <div class="form-group">
-    <input type="text" name="monto" class="form-control" placeholder="Monto del ticket">
+    <input type="text" name="monto" class="form-control" placeholder="Monto del ticket" required>
   </div>
   <div class="form-group">
   <h3>Metodo de pago</h3>
-    <select class="form-control">
+    <select class="form-control" name="formaPago">
     <option value="Efectivo">Efectivo</option>
     <option value="Transferencia electronica">Transferencia electronica</option>
     <option value="Tarjeta de credito">Tarjeta de credito</option>
@@ -46,50 +22,122 @@
     <option value="No identificado">No identificado</option>
     </select>
   </div>
-  <div class="form-group">
-    <input type="text" name="correo" class="form-control" placeholder="Correo Electronico">
-  </div>
-  <div class="form-group">
-    <input class="btn btn-primary" name="enviar" type="submit" id="enviar" value="Enviar" >
  
-    <input class="btn" name="add" type="button" id="btn-add" value="Añadir">
+  <div class="form-group">
+  <!--  <input class="btn btn-primary" name="enviar" type="submit" id="enviar" value="Enviar" >
+  -->
+    <input class="btn" name="add" type="submit" id="btn-add" value="Añadir">
  
-    <input class="btn"type='button' name='BReset' onClick='lista_tickets.value=""' value='Vaciar' id='BReset'>
+    <input class="btn" type='button' name='reset' value='Vaciar' id='btn-reset'>
   </div>
   <input type="hidden" name="id_cliente" value="">
+  </form>
 </div>
 <div class="col-lg-6">
     <h2 class="text-center">Por facturar <small>0</small></h2>
+    <form id="form3" action="./includes/enviarTickets.php" method="POST"> 
+    <input type="hidden" name="tickets" value="" >
+     <div class="form-group">
+    <input type="email" name="correo" class="form-control" value="" placeholder="Correo Electronico" 
+    pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" required>
+  ` </div>
+    <button class="btn" type="submit" name="facturar"> Facturar </button>
+    </form>
+    
+
     <ol id="lista-tickets">
       
     </ol>
 </div>
-</form>
+
 
 
 </div>
 <script type="text/javascript">
+var facturar  = {  idCliente:idCliente,
+                      correo:"",
+                listaTickets:[]
+                },
+    inputCorreo = $('input[name="correo"]');
+console.log(facturar);
+/*             MODELO 
+               {   idCliente:"",
+                      correo:"",
+                listaTickets:[
+                    {ticket:"",
+                      monto:"",
+                  formaPago:""}]
+                };*/
+
+
       //form2
- $("#btn-add").on("click",function(event){
-            event.preventDefault();
-     var obj={ticket:"", monto:""}; 
+ $("#form2").on("submit",function(event){
+            event.preventDefault();       
+     var obj={ticket:"", monto:"", formaPago:""}; 
      obj.ticket = $('input[name="ticket"]').val();
      obj.monto = $('input[name="monto"]').val();
-     
+     obj.formaPago = $('select[name="formaPago"]').val();
+
+     if(enContenedor(obj.ticket)){
+      return;
+      }  
      $.post('./includes/agregaTicket.php', obj , function(data, textStatus, xhr) {
          /*optional stuff to do after success */
          var datos = JSON.parse(data);         
          if(datos.found === true){
             var li = $("<li>"+obj.ticket+"</li>"),
                 ul = $('#lista-tickets');
-            ul.append(li);
-            
-            ul.closest('div').find('small').text(cantidad);
+                ul.append(li);            
+                $('#form2').find('input[type=text]').slice(0,2).val("");
+                facturar.listaTickets.push(obj);
+                $('input[name="tickets"]').val(JSON.stringify(facturar));
          }else{
             alert("ticket no disponible para facturacion");
          }
      });
   });
+ $("#btn-reset").on("click",function(){
+    $("#lista-tickets").empty();
+     $('#form2').find('input[type=text]').slice(0,2).val("");
+ });
 
-  
+$('#form3').on('submit', function(event) {
+
+  if(facturar.listaTickets.length > 0){  
+      //envia defaULT
+    }else{
+      event.preventDefault();
+    }
+
+});
+inputCorreo.on('change', function(event) {
+  event.preventDefault();
+  /* Act on the event */
+ facturar.correo = inputCorreo.val();
+ alert(facturar.correo);
+});
+
+var intputElements = document.getElementsByTagName("input");
+    for (var i = 0; i < intputElements.length; i++) {
+        intputElements[i].oninvalid = function (e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                if (e.target.name == "correo") {
+                    e.target.setCustomValidity("Ingrese Email  con formato example@email.com");
+                }
+            }
+        };
+    }
+  var enContenedor= function(ticket){
+      if(facturar.listaTickets[0]=== undefined)
+      return false;
+      var contenedor =facturar.listaTickets,
+      found=false;
+      $.each(contenedor, function(index, val) {
+         /* iterate through array or object */
+          console.log(val.ticket);
+          if(ticket == val.ticket){found=true;}
+      });
+        return found;      
+  }
 </script>
